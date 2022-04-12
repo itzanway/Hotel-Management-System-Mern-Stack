@@ -40,7 +40,8 @@ mongoose
 app.use("/room", require("./routes/employee-manager/RoomRoute"));
 
 
-
+//Invertory management routes
+app.use("/inventory", require("./routes/inventory-manager/InventoryRoute"));
 
 
 
