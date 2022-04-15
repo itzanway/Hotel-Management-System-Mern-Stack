@@ -8,6 +8,10 @@ import AddRoom from './components/room/AddRoom'
 import ViewRooms from './components/room/ViewAllRooms'
 import ViewOneRoom from './components/room/ViewOneRoom'
 
+import EmpsideNav from'./components/layouts/Employeesidenav'
+import AddEmployee from './components/employee/Addemployee'
+import ViewEmployees from './components/employee/ViewAllEmployee'
+
 
 
 
@@ -27,6 +31,11 @@ function App() {
       <Route exact path = "/roommanager/add"><AddRoom/></Route>
       <Route exact path = "/roommanager/view"><ViewRooms/></Route>
       <Route exact path = "/roomManager/view/:id"><ViewOneRoom/></Route>
+
+      {/* Room Management Routes */}
+      <Route path = "/empmanager"><EmpsideNav/></Route>
+      <Route exact path = "/empmanager/add"><AddEmployee/></Route>
+      <Route exact path = "/empmanager/view"><ViewEmployees/></Route>
 
     </BrowserRouter>
   );

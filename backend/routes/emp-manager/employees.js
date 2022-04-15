@@ -35,14 +35,24 @@ router.route("/add").post((req,res)=>{
 })
 
 //retrive data in employee db
-router.route("/retrieve").get((req,res)=>{
+router.get('/', async(req,res)=>{
+    try{
+        const allEmployees = await Employees.find();
+        res.status(200).send({data : allEmployees});
+    }catch(err){
+        res.status(500).send({data : err});
+    }
+})
 
-    Employees.find().then((employees)=>{
-        res.json(employees)
-    }).catch((err)=>{
-        console.log(err)
-    })
-}) 
+
+router.get('/', async(req,res)=>{
+    try{
+        const allEmployees = await Room.find();
+        res.status(200).send({data : allEmployees});
+    }catch(err){
+        res.status(500).send({data : err});
+    }
+})
 //update employee details
 router.route("/update/:id").put(async(req,res)=>{
     let Emp_id = req.params.id;
