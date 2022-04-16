@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function ViewOneSupplier() {
 
-    const [isLoading,setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false);
 
     const [textState, setTextState] = useState(true);
     const [btngrpState1, setBtnGroupstate1] = useState(true);
@@ -19,32 +19,31 @@ export default function ViewOneSupplier() {
 
 
 
-    const [supname, setSupname] = useState("");
-    const [email, setEmail] = useState("");
-    const [contactnumber, setContactnumber] = useState("");
-    const [nic, setNic ] = useState("");
-    const [category, setCategory] = useState("");
-    const [companyname, setCompanyaddress] = useState("");
-    const [companyaddress, setCompanyname] = useState("");
-    
-    
+    const [supname, setsupname] = useState("");
+    const [email, setemail] = useState("");
+    const [contactnumber, setcontactnumber] = useState("");
+    const [nic, setnic] = useState("");
+    const [category, setcategory] = useState("");
+    const [companyname, setcompanyname] = useState("");
+    const [companyaddress, setcompanyaddress] = useState("");
+  
+
 
     const { id } = useParams();
 
-    //This useEffect function used to get supplier data
+    //This useEffect function used to get room data
     useEffect(() => {
         async function getDetails() {
             try {
                 const result = await (await axios.get(`http://localhost:5001/supplier/${id}`)).data.data
+                setsupname(result[0].supname);
+                setemail(result[0].email)
+                setcontactnumber(result[0].contactnumber);
+                setnic(result[0].nic)
+                setcategory(result[0].category);
+                setcompanyname(result[0].companyname)
+                setcompanyaddress(result[0].companyaddress);
                 
-                setSupname(result[0].supname);
-                setEmail(result[0].email)
-                setContactnumber(result[0].contactnumber);
-                setNic(result[0].nic)
-                setCategory(result[0].category);
-                setCompanyname(result[0].companyname,)
-                setCompanyaddress(result[0].companyaddress,)
-
 
                 setLoaderStatus(true)
                 setTableStatus(false)
@@ -55,7 +54,7 @@ export default function ViewOneSupplier() {
         }
 
         getDetails();
-    },[])
+    }, [])
 
 
     async function updateData(e) {
@@ -134,7 +133,7 @@ export default function ViewOneSupplier() {
                             theme: "dark",
                             useTransparency: true,
                             onOk: function () {
-                                window.location = "#"
+                                window.location = "/supmanager/view"
                             },
 
                         });
@@ -182,50 +181,58 @@ export default function ViewOneSupplier() {
 
 
             <div hidden={tebleStatus}>
-                <h3>Edit/Delete supplier</h3><hr />
+                <h3>Edit/Delete Suplier</h3><hr />
                 <form class="row g-3 needs-validation" id="inputForm2" novalidate>
                 <div class="col-md-6 position-relative">
-                    <label for="validationTooltip01" class="form-label">Supplier Name</label>
+                    <label for="validationTooltip01" class="form-label">Name</label>
                     <input type="text" class="form-control" id="validationTooltip01" required defaultValue={supname}
-                        onChange={(e) => { setSupname(e.target.value) }} disabled={textState}/>
+                        onChange={(e) => { setsupname(e.target.value) }} disabled={textState}/>
                 </div>
 
                 <div class="col-md-6 position-relative">
                     <label for="validationTooltip02" class="form-label">Email</label>
-                    <input type="number" class="form-control" id="validationTooltip02" required defaultValue={email}
-                        onChange={(e) => { setEmail(e.target.value) }} disabled={textState}/>
+                    <input type="text" class="form-control" id="validationTooltip02" required defaultValue={email}
+                        onChange={(e) => { setemail(e.target.value) }} disabled={textState}/>
+                </div><br />
+
+                <div class="col-md-6 position-relative">
+                    <label for="validationTooltip02" class="form-label">Contact Number</label>
+                    <input type="text" class="form-control" id="validationTooltip02" required defaultValue={contactnumber}
+                        onChange={(e) => { setcontactnumber(e.target.value) }} disabled={textState}/>
+                </div><br />
+
+                <div class="col-md-6 position-relative">
+                    <label for="validationTooltip02" class="form-label">Nic</label>
+                    <input type="text" class="form-control" id="validationTooltip02" required defaultValue={nic}
+                        onChange={(e) => { setnic(e.target.value) }} disabled={textState}/>
                 </div><br />
                
                 <div class="col-md-6 position-relative">
-                <label for="validationTooltip03" class="form-label">Contact Number</label>
-                    <input type="text" class="form-control" id="validationTooltip03" required 
-                        onChange={(e) => { setContactnumber(e.target.value) }} defaultValue={contactnumber} disabled={textState}/>
-                </div>
-                   
-                <div class="col-md-6 position-relative">
-                    <label for="validationTooltip03" class="form-label">Nic</label>
-                    <input type="text" class="form-control" id="validationTooltip03" required
-                        onChange={(e) => { setNic(e.target.value) }} defaultValue={nic} disabled={textState}/>
-                </div>
-                <div class="col-md-6 position-relative">
-                <select class="form-select" id="validationTooltip04" required disabled={textState} onChange={(e) => { setCategory(e.target.value) }}>
-                        <option selected disabled>{category}</option>
+                    <label for="validationTooltip04" class="form-label">Category</label>
+                    <select class="form-select" id="validationTooltip04" required disabled={textState} onChange={(e) => { setcategory(e.target.value) }}>
+                    <option selected disabled>{category}</option>
                         <option>Food</option>
                         <option>Furniture</option>
                     </select>
                 </div>
-
-                <div class="col-md-5 position-relative">
+                   
+                <div class="col-md-6 position-relative">
                     <label for="validationTooltip03" class="form-label">Company Name</label>
-                    <input type="text" class="form-control" id="validationTooltip03" disabled={textState} required defaultValue={companyname}
-                        onChange={(e) => { setCompanyname(e.target.value) }} />
+                    <input type="text" class="form-control" id="validationTooltip03" required
+                        onChange={(e) => { setcompanyname(e.target.value) }} defaultValue={companyname} disabled={textState}/>
+                </div>
+                <div class="col-md-6 position-relative">
+                    <label for="validationTooltip03" class="form-label">Company Address</label>
+                    <input type="text" class="form-control" id="validationTooltip03" disabled={textState} required defaultValue={companyaddress}
+                        onChange={(e) => { setcompanyaddress(e.target.value) }} />
                 </div>
 
-                <div class="col-md-5 position-relative">
-                    <label for="validationTooltip03" class="form-label">Company addree</label>
-                    <input type="text" class="form-control" id="validationTooltip03" disabled={textState} required defaultValue={companyaddress}
-                        onChange={(e) => { setCompanyaddress(e.target.value) }} />
-                </div>
+                
+
+               
+
+               
+               
                 
 
                 <div class="col-12" id="btngrp" hidden={btngrpState1} style={{marginTop:"5%"}}>
