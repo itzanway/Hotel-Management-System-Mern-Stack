@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SoloAlert from 'soloalert'
 import axios from 'axios';
 import validation from 'validator'
-import '../Home.css'
+import './Home.css'
 
 
 

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import SoloAlert from 'soloalert'
 import axios from 'axios';
 import validation from 'validator'
-import '../Home.css'
-
-
+import './Home.css'
 
 export default function RoomBookings() {
-
+    // ...existing code...
     const [isLoading, setLoading] = useState(false);
 
     const [fname, setfname] = useState("");
@@ -24,7 +23,7 @@ export default function RoomBookings() {
         setLoading(true)
         try {
             e.preventDefault();
-            if (!fname || !lname || !roomtype || !noofguests  || !from || !to || !email || !contactno ) {
+            if (!fname || !lname || !roomtype || !noofguests || !from || !to || !email || !contactno) {
                 SoloAlert.alert({
                     title: "Oops!",
                     body: "Please fill all fields",
@@ -35,7 +34,7 @@ export default function RoomBookings() {
 
                     },
                 });
-            }else if (!validation.isEmail(email)) {
+            } else if (!validation.isEmail(email)) {
                 SoloAlert.alert({
                     title: "Oops!",
                     body: "Please enter valid mail address",
@@ -46,13 +45,13 @@ export default function RoomBookings() {
 
                     },
                 });
-            
-             } else {
+
+            } else {
                 const newDetails = {
-                    fname, lname, roomtype, noofguests, from,to, email, contactno
+                    fname, lname, roomtype, noofguests, from, to, email, contactno
                 }
-                
-                const data =  (await axios.post("http://localhost:5000/booking/", newDetails)).status
+
+                const data = (await axios.post("http://localhost:5000/booking/", newDetails)).status
                 if (data === 200) {
                     SoloAlert.alert({
                         title: "Welcome!",
@@ -76,11 +75,12 @@ export default function RoomBookings() {
     function clear() {
 
     }
+
+
     return (
         <div className="content">
             <h3>Room Booking</h3><hr />
-
-            <form class="row g-3 needs-validation" id="inputForm2" novalidate>
+            <form className="row g-3 needs-validation form" id="inputForm2" noValidate>
                 <div class="col-md-6 position-relative">
                     <label for="validationTooltip01" class="form-label">First Name</label>
                     <input type="text" class="form-control" id="validationTooltip01" required
@@ -112,7 +112,7 @@ export default function RoomBookings() {
                     <input type="number" class="form-control" id="validationTooltip02" required
                         onChange={(e) => { setnoofguests(e.target.value) }} />
                 </div>
-                
+
 
                 <div class="col-md-6 position-relative">
                     <label for="validationTooltip03" class="form-label">From</label>
@@ -125,7 +125,7 @@ export default function RoomBookings() {
                     <input type="date" class="form-control" id="validationTooltip03" required
                         onChange={(e) => { setto(e.target.value) }} />
                 </div>
-               
+
                 <br />
                 <div class="col-md-6 position-relative">
                     <label for="validationTooltip01" class="form-label">Email</label>
@@ -139,14 +139,10 @@ export default function RoomBookings() {
                         onChange={(e) => { setcontactno(e.target.value) }} />
                 </div>
 
-                
-                
-
-
-                <div class="col-12" style={{ marginTop: "50px", marginLeft: "65%" }}>
-                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" onClick={(e) => { clear(e) }}><i class="fa fa-ban"></i> Clear</button>&nbsp;&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-primary" onClick={(e) => { submitData(e) }}
-                        disabled={isLoading} ><i class="fa fa-file-export"></i>  {isLoading ? 'Sending..' : 'Book Room'}</button>
+                <div className="col-12 d-flex justify-content-end" style={{ marginTop: "50px" }}>
+                    <button type="submit" className="btnb btn-secondary me-3" data-bs-dismiss="modal" onClick={(e) => { clear(e) }}><i className="fa fa-ban"></i> Clear</button>
+                    <button type="submit" className="btnb btn-primary" onClick={(e) => { submitData(e) }}
+                        disabled={isLoading} ><i className="fa fa-file-export"></i>  {isLoading ? 'Sending..' : 'Book Room'}</button>
                 </div>
             </form>
 

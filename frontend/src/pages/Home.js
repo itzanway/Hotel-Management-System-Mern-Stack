@@ -4,22 +4,26 @@ import Hero from "../components/Hero";
 import Banner from "../components/Banner";
 import Services from "../components/Services";
 import FeaturedRooms from "../components/FeaturedRooms";
+import Footer from "../components/layouts/Footer";
+// import { Carousel } from "react-bootstrap";
+import Carousel from "../components/Carousel";
 const home = () => {
   return (
-    <>
+    <div>
+      {/* <Carousel/> */}
       <Hero>
         <Banner
           title="Hotel Elite"
-          subtitle="cheaper rooms starting at Rs.1500.00"
-        >
+          subtitle="cheaper rooms starting at Rs.1500.00">
           <Link to="/cuslogin" className="btn-home-primary">
-            our rooms
+            Our Rooms
           </Link>
         </Banner>
       </Hero>
       <Services />
       <FeaturedRooms />
-    </>
+      <Footer />
+    </div>
   );
 };
 
